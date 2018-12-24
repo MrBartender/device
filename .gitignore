@@ -1,0 +1,5 @@
+# IDE Configs
+.vscode
+
+# Vendor Files
+node_modules/
