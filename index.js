@@ -21,4 +21,4 @@ app.get('/', (req, res) => {
 })
 
 // Run the device server
-app.listen(3000, () => console.log(`MrBartender listening on port ${port}!`))
+app.listen(3000, () => console.log(`MrBartender listening on port 3000!`))
