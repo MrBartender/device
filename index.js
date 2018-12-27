@@ -16,7 +16,7 @@ app.use(express.static('public'))
 app.get('/', (req, res) => {
   helpers.checkValidInternetConnection()
     .then(() => {
-      res.sendFile(path.join(__dirname + '/index.html'))
+      res.sendFile(path.join(__dirname + '/public/index.html'))
     })
     .catch((err) => {
       console.log(err)
