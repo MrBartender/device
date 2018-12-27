@@ -3,16 +3,20 @@
 const express = require('express')
 const helmet = require('helmet')
 const helpers = require('./helpers')
+const path = require('path')
 const app = express()
 
 // Setup Security middleware
 app.use(helmet())
 
+// Serve static files
+app.use(express.static('public'))
+
 // handle base route - interrupt if no internet connection
 app.get('/', (req, res) => {
   helpers.checkValidInternetConnection()
     .then(() => {
-      res.send('Valid Connection!')
+      res.sendFile(path.join(__dirname + '/index.html'))
     })
     .catch((err) => {
       console.log(err)
