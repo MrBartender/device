@@ -10,13 +10,13 @@ const app = express()
 app.use(helmet())
 
 // Serve static files
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // handle base route - interrupt if no internet connection
 app.get('/', (req, res) => {
   helpers.checkValidInternetConnection()
     .then(() => {
-      res.sendFile(path.join(__dirname + '/public/index.html'))
+      res.sendFile(path.join(__dirname, 'index.html'))
     })
     .catch((err) => {
       console.log(err)
