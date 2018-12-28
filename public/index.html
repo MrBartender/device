@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>MrBartender</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/core.css">
+</head>
+<body>
+  <div id="app">
+    <transition name="fade">
+      <router-view v-if="loaded" key="view"></router-view>
+      <div v-else class="spinner" key="spinner"></div>
+    </transition>
+  </div>
+  
+  <!-- Page refresh helper button -->
+  <button class="refresh_helper" onclick="location.reload()">Refresh</button>
+
+  <!-- Scripts -->
+  <script src="js/vendor/vue-2.5.21.min.js"></script>
+  <script src="js/vendor/vue-router-3.0.2.min.js"></script>
+  <script src="js/vendor/axios-0.18.0.min.js"></script>
+  <script src="js/bundle.js"></script>
+</body>
+</html>

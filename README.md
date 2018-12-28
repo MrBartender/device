@@ -50,3 +50,13 @@ Run the following commands:
 `$ sudo apt upgrade`
 
 That should update everything necessary.
+
+
+## Developing
+
+Development watch script (from root dir):
+`$ watchify src/core.js -o public/js/bundle.js & nodemon index.js`
+_Note: Don't forget to run `kill` on the background process when canceling!_
+
+Make Production:
+`$ browserify src/core.js -o public/js/bundle.js`
