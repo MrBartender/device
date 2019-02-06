@@ -1,9 +1,10 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+require("babel-polyfill")
 
 module.exports = {
-  entry: './src/core.js',
+  entry: ['babel-polyfill', './src/core.js'],
   output: {
     path: path.resolve(__dirname, 'public')
   },
@@ -20,6 +21,14 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   },
