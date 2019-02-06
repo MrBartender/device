@@ -51,7 +51,6 @@ Run the following commands:
 
 That should update everything necessary.
 
-
 ## Developing
 
 Development watch script (from root dir):
@@ -60,3 +59,4 @@ _Note: Don't forget to run `kill` on the background process when canceling!_
 
 Make Production:
 `$ browserify src/core.js -o public/js/bundle.js`
+`$ npm run build`

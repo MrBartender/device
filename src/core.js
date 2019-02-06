@@ -1,19 +1,10 @@
-const Router = require('./router')
+import Vue from 'vue'
+import Router from './router'
+import App from './App.vue'
 
 // Start app
-const app = new Vue({
+new Vue({
+  el: '#app',
   router: Router,
-  data: {
-    loaded: false,
-  },
-  created () {
-    axios.get('/check-online')
-      .then((response) => {
-        this.$router.push(response.data.online ? 'queue' : 'connect')
-        this.loaded = true
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-  }
-}).$mount('#app')
+  render: (h) => h(App)
+})
