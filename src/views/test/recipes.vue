@@ -1,25 +1,22 @@
 <template>
   <div>
-    <recipe :recipe="selected" class="full-width"></recipe>
+    <recipe-view :recipe="selected" class="full-width"></recipe-view>
     <select v-model="selected">
-      <option selected disabled>Choose</option>
-      <option v-for="recipe in recipes" :key="recipe[0]" :value="recipe">
-          {{ recipe[0] }}
+      <option v-for="recipe in recipes" :key="recipe[name]" :value="recipe">
+          {{ recipe[name] }}
       </option>
     </select>
   </div>
 </template>
 
 <script>
-import recipes from '@/data/recipes.js'
-import recipe from '@/components/recipe.vue'
+import { recipes, name, first } from '@/data/recipes.js'
+import recipeView from '@/components/recipe.vue'
 
 export default {
   name: 'recipes-test',
-  data: () => {
-    return { recipes, selected: recipes[1] }
-  },
-  components: { recipe }
+  data: () => ({ recipes, selected: recipes[first], name, first }),
+  components: { recipeView }
 }
 </script>
 
