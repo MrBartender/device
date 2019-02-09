@@ -4,8 +4,9 @@
   "description": "On-Device code for the bartender",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --progress --hot --open",
-    "build": "webpack --mode production --progress"
+    "dev": "webpack --mode development --progress",
+    "build": "webpack --mode production --progress",
+    "server": "nodemon index.js"
   },
   "repository": {
     "type": "git",

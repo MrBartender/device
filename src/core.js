@@ -1,13 +1,13 @@
-import Vue from 'vue'
-import Router from './router'
-import App from './App.vue'
-import TouchEvents from 'vue2-touch-events'
+import vue from 'vue'
+import router from './router'
+import app from './app.vue'
+import touchEvents from 'vue2-touch-events'
 
-Vue.use(TouchEvents)
+vue.use(touchEvents)
 
 // Start app
-new Vue({
+new vue({
   el: '#app',
-  router: Router,
-  render: (h) => h(App)
+  router,
+  render: (h) => h(app)
 })

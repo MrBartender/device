@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import PumpTestButton from '../components/PumpTestButton.vue'
+import PumpTestButton from '@/components/PumpTestButton.vue'
 
 export default {
   name: 'test',

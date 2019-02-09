@@ -1,21 +1,30 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import vue from 'vue'
+import vueRouter from 'vue-router'
 
 // Get views
-import TestPumps from './views/TestPumps.vue'
+import test from './views/test/layout.vue'
+import pumps from './views/test/pumps.vue'
+import recipes from './views/test/recipes.vue'
 // import Queue from './views/queue'
 // import Connect from './views/connect'
 
 // Init Plugin
-Vue.use(VueRouter)
+vue.use(vueRouter)
 
 // Setup Router
-const Router = new VueRouter({
+const router = new vueRouter({
   routes: [
-    { path: '/home', component: TestPumps },
+    { 
+      path: '/test',
+      component: test,
+      children: [
+        { path: 'pumps', component: pumps },
+        { path: 'recipes', component: recipes }
+      ]
+    },
     // { path: '/queue', component: Queue },
     // { path: '/connect', component: Connect }
   ]
 })
 
-export default Router
+export default router
