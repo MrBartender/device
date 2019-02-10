@@ -39,7 +39,7 @@ wifi.init({
 app.use(helmet())
 
 // Serve static files
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, '..', 'public')))
 
 // Parse Post data
 app.use(bodyParser.json())
