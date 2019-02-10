@@ -7,7 +7,7 @@ xset -dpms
 unclutter -display 0:0 -noevents -grab
 
 # Start Backend Server and restart when updated
-let bdr = /home/kiosk-user/mrbartender
+bdr=/home/kiosk-user/mrbartender
 forever start -o "$bdr/logs/output.log" -e "$bdr/logs/errors.log" -w --watchDirectory "$bdr/server" "$bdr/server/index.js" &
 
 # Start Chromium in kiosk mode
