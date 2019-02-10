@@ -8,7 +8,12 @@ const Connect = {
         console.error(err)
       })
   },
-  template: `<div>Hello from Connect!</div>`
+  methods: {
+    reload() {
+      this.$router.go()
+    }
+  },
+  template: `<div>Hello from Connect!</div><p></p><button v-touch:tap="reload">Refresh</button>`
 }
 
 module.exports = Connect

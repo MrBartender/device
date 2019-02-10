@@ -6,7 +6,7 @@ import test from './views/test/layout.vue'
 import pumps from './views/test/pumps.vue'
 import recipes from './views/test/recipes.vue'
 import ingredients from './views/test/ingredients.vue'
-// import Connect from './views/connect'
+import Connect from './views/connect'
 
 // Init Plugin
 vue.use(vueRouter)
@@ -23,7 +23,7 @@ const router = new vueRouter({
         { path: 'ingredients', component: ingredients }
       ]
     },
-    // { path: '/connect', component: Connect }
+    { path: '/connect', component: Connect }
   ]
 })
 
