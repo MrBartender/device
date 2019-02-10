@@ -69,20 +69,20 @@ app.get('/scan', (req, res) => {
 
 // Start a pump by id
 app.post('/startPump', (req, res) => {
-  let pump_id = (req.body.id).toString()
+  // let pump_id = (req.body.id).toString()
 
-  console.log('Turning on pump ' + pump_id)
-  pumps[pump_id].writeSync(0)
+  // console.log('Turning on pump ' + pump_id)
+  // pumps[pump_id].writeSync(0)
 
-  res.send({
-    pump: {
-      id: pump_id,
-      status: pumps[pump_id].readSync()
-    }
-  })
   // res.send({
-  //   pump: { id: true }
+  //   pump: {
+  //     id: pump_id,
+  //     status: pumps[pump_id].readSync()
+  //   }
   // })
+  res.send({
+    pump: { id: true }
+  })
 })
 
 // Stop a pump by id
