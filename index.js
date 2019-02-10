@@ -4,7 +4,7 @@ const express = require('express')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
 
-// const GPIO = require('onoff').Gpio
+const GPIO = require('onoff').Gpio
 const isOnline = require('is-online')
 const wifi = require('node-wifi')
 
@@ -98,7 +98,7 @@ app.post('/stopPump', (req, res) => {
 })
 
 // Run the device server
-app.listen(3000, () => console.log(`MrBartender listening on port 3000!`))
+app.listen(3000, () => console.log('MrBartender listening on port 3000!'))
 
 // Cleanup GPIO resources on server close
 process.on('exit', () => {
