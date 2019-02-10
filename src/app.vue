@@ -22,6 +22,9 @@ export default {
         if (!response.online) {
           this.$router.replace('/connect')
         }
+        if (response.online && this.$route.path == '/connect') {
+          this.$router.replace('/test')
+        }
         this.loaded = true
       })
       .catch((err) => {
