@@ -6,9 +6,6 @@ xset -dpms
 # Allow quitting the X server with CTRL-ATL-Backspace
 unclutter -display 0:0 -noevents -grab
 
-# Start Backend Server and restart when updated
-forever -o /home/kiosk-user/mrbartender/logs/output.log -e /home/kiosk-user/mrbartender/logs/errors.log -w --watchDirectory=/home/kiosk-user/mrbartender/server start /home/kiosk-user/mrbartender/server/index.js &
-
 # Start Chromium in kiosk mode
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/'Local State'
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/; s/"exit_type":"[^"]\+"/"exit_type":"Normal"/' ~/.config/chromium/Default/Preferences
