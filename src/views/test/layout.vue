@@ -6,6 +6,7 @@
       <button v-touch:tap="reload">Refresh</button>
       <router-link to="/test/pumps">Pumps</router-link>
       <router-link to="/test/recipes">Recipes</router-link>
+      <router-link to="/test/ingredients">Ingredients</router-link>
     </nav>
   </div>
 </template>

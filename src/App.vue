@@ -19,7 +19,9 @@ export default {
     })
       .then((response) => response.json())
       .then((response) => {
-        this.$router.replace(response.online ? '/test' : '/connect')
+        if (!response.online) {
+          this.$router.replace('/connect')
+        }
         this.loaded = true
       })
       .catch((err) => {

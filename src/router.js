@@ -5,7 +5,7 @@ import vueRouter from 'vue-router'
 import test from './views/test/layout.vue'
 import pumps from './views/test/pumps.vue'
 import recipes from './views/test/recipes.vue'
-// import Queue from './views/queue'
+import ingredients from './views/test/ingredients.vue'
 // import Connect from './views/connect'
 
 // Init Plugin
@@ -19,10 +19,10 @@ const router = new vueRouter({
       component: test,
       children: [
         { path: 'pumps', component: pumps },
-        { path: 'recipes', component: recipes }
+        { path: 'recipes', component: recipes },
+        { path: 'ingredients', component: ingredients }
       ]
     },
-    // { path: '/queue', component: Queue },
     // { path: '/connect', component: Connect }
   ]
 })

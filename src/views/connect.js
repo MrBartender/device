@@ -1,6 +1,6 @@
 const Connect = {
   created () {
-    axios.get('/scan')
+    fetch('/scan', { method: 'get' })
       .then((response) => {
         console.log(response)
       })

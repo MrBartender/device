@@ -4,7 +4,7 @@ const express = require('express')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
 
-const GPIO = require('onoff').Gpio
+const gpio = require('onoff').Gpio
 const isOnline = require('is-online')
 const wifi = require('node-wifi')
 
@@ -15,18 +15,18 @@ const app = express()
 let nums = [ 2, 3, 4, 5, 6, 13, 14, 15, 17, 18, 19, 26 ]
 
 let pumps = {
-  '1': new GPIO(26, 'high'),
-  '2': new GPIO(19, 'high'),
-  '3': new GPIO(13, 'high'),
-  '4': new GPIO(6, 'high'),
-  '5': new GPIO(5, 'high'),
-  '6': new GPIO(2, 'high'),
-  '7': new GPIO(3, 'high'),
-  '8': new GPIO(4, 'high'),
-  '9': new GPIO(17, 'high'),
-  '10': new GPIO(14, 'high'),
-  '11': new GPIO(15, 'high'),
-  '12': new GPIO(18, 'high')
+  '1': new gpio(26, 'high'),
+  '2': new gpio(19, 'high'),
+  '3': new gpio(13, 'high'),
+  '4': new gpio(6, 'high'),
+  '5': new gpio(5, 'high'),
+  '6': new gpio(2, 'high'),
+  '7': new gpio(3, 'high'),
+  '8': new gpio(4, 'high'),
+  '9': new gpio(17, 'high'),
+  '10': new gpio(14, 'high'),
+  '11': new gpio(15, 'high'),
+  '12': new gpio(18, 'high')
 }
 
 // Init the wifi module
@@ -80,9 +80,6 @@ app.post('/startPump', (req, res) => {
       status: pumps[pump_id].readSync()
     }
   })
-  // res.send({
-  //   pump: { id: true }
-  // })
 })
 
 // Stop a pump by id
