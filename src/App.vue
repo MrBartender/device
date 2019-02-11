@@ -21,8 +21,7 @@ export default {
       .then((response) => {
         if (!response.online) {
           this.$router.replace('/connect')
-        }
-        if (response.online && this.$route.path == '/connect') {
+        } else {
           this.$router.replace('/test')
         }
         this.loaded = true

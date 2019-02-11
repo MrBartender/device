@@ -2,11 +2,11 @@
   "name": "device",
   "version": "0.0.1",
   "description": "On-Device code for the bartender",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "dev": "webpack --mode development --progress",
     "build": "webpack --mode production --progress",
-    "server": "nodemon index.js"
+    "server": "nodemon ./server/index.js"
   },
   "repository": {
     "type": "git",
