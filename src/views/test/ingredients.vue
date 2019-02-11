@@ -1,22 +1,27 @@
 <template>
   <div>
-    <recipe-view :recipe="selected" class="full-width"></recipe-view>
-    <select v-model="selected">
-      <option v-for="recipe in recipes" :key="recipe[name]" :value="recipe">
-          {{ recipe[name] }}
-      </option>
-    </select>
+    <div v-for="in_this_iteration of pumps" :key="in_this_iteration">
+      <ingredient-selector
+        :pump="in_this_iteration"
+        :initial_assignment="ingredient_assigned_to_pump(in_this_iteration)"
+        class="full-width"></ingredient-selector>
+    </div>
   </div>
 </template>
 
 <script>
-import { recipes, name, first } from '@/data/recipes.js'
-import recipeView from '@/components/recipe.vue'
+import { pumps, } from '@/data/pumps'
+import { ingredients, ingredient_assigned_to_pump } from '@/data/ingredients'
+import ingredientSelector from '@/components/ingredientSelector.vue'
 
 export default {
-  name: 'recipes-test',
-  data: () => ({ recipes, selected: recipes[first], name, first }),
-  components: { recipeView }
+  name: 'ingredients-assignment-test',
+  data: () => ({ 
+    pumps,
+    ingredients
+  }),
+  methods: { ingredient_assigned_to_pump },
+  components: { ingredientSelector }
 }
 </script>
 
