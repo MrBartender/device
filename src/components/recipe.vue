@@ -1,6 +1,5 @@
 <template>
   <div class="full-width">
-
     <h2>Recipe: {{ name }}</h2>
 
     <ul>

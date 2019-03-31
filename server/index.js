@@ -6,12 +6,11 @@ const bodyParser = require('body-parser')
 
 const isOnline = require('is-online')
 const wifi = require('node-wifi')
+const mongoClient = require('mongodb').MongoClient
 
 const path = require('path')
 const app = express()
-
-// Initialize pumps
-import { id_of, turn_on, power_to } from '@/data/pumps'
+let db = null
 
 // Init the wifi module
 wifi.init({
@@ -27,6 +26,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')))
 
 // Parse Post data
 app.use(bodyParser.json())
+
 
 // handle base route - interrupt if no internet connection
 app.get('/', (req, res) => {
@@ -51,6 +51,11 @@ app.get('/scan', (req, res) => {
     })
 })
 
+app.get('/pump', (req, res) => {
+  const id = req.body.pump
+
+})
+
 // Start a pump by id
 app.post('/startPump', (req, res) => {
   const pump = req.body.pump
@@ -71,13 +76,20 @@ app.post('/stopPump', (req, res) => {
   res.send({ pump })
 })
 
-// Run the device server
-app.listen(3000, () => console.log('MrBartender listening on port 3000!'))
 
-// Cleanup GPIO resources on server close
-process.on('exit', () => {
-  console.log('Exiting MrBartender, happy drinking!')
-  for (let i = 1; i <= 12; i++) {
-    pumps[i.toString()].unexport()
-  }
+mongoClient.connect('link-to-mongodb', (err, client) => {
+  if (err) return console.error(err)
+
+  db = client.db('device')
+
+  // Run the device server
+  app.listen(3000, () => console.log('MrBartender listening on port 3000!'))
+  
+  // Cleanup GPIO resources on server close
+  // process.on('exit', () => {
+  //   console.log('Exiting MrBartender, happy drinking!')
+  //   for (let i = 1; i <= 12; i++) {
+  //     pumps[i.toString()].unexport()
+  //   }
+  // })
 })

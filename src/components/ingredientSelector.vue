@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>{{ id_of(pump) }}</h2>
+    <h2>{{ pump.id }}</h2>
     <select v-model="assigned_ingredient">
       <option v-for="ingredient in ingredients" :key="name_of(ingredient)" :value="ingredient">
           {{ name_of(ingredient) }}
@@ -10,25 +10,25 @@
 </template>
 
 <script>
-import { ingredients, ingredient_assigned_to_pump, name_of } from '@/data/ingredients'
-import { id_of } from '@/data/pumps'
+import { ingredients, name_of } from '@/data/ingredients'
 
 export default {
   name: 'ingredient-selector',
   props: [ 'pump', 'initial_assignment' ],
   data: () => ({
-    ingredients, 
-    pump: this.pump, 
+    ingredients,
+    pump: this.pump,
     assigned_ingredient: this.initial_assignment
   }),
-  methods: { id_of, name_of },
+  methods: { name_of },
   watch: {
     assigned_ingredient (ingredient_to_assign, old_assignment) {
-      fetch('/assign_pump/' + this.id_of(this.pump)
-        + '/to_ingredient/' + this.name_of(this.assigned_ingredient), {
+      this.pump.assign_to(this.assigned_ingredient)
+      fetch('/assign_pump/' + this.pump.id + '/to_ingredient/' + this.name_of(this.assigned_ingredient), {
           method: 'post',
           body: JSON.stringify({
-            
+            pump: this.pump.id,
+            ingredient: this.assigned_ingredient.id
           })
         }).then((t) => t)
     }

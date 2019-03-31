@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import { pumps, } from '@/data/pumps'
+import { pumps } from '@/data/pumps'
 import { ingredients, ingredient_assigned_to_pump } from '@/data/ingredients'
 import ingredientSelector from '@/components/ingredientSelector.vue'
 
 export default {
   name: 'ingredients-assignment-test',
-  data: () => ({ 
+  data: () => ({
     pumps,
     ingredients
   }),
