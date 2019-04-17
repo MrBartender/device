@@ -20,7 +20,7 @@ const router = new vueRouter({
       children: [
         { path: 'pumps', component: pumps },
         { path: 'recipes', component: recipes },
-        { path: 'ingredients', component: ingredients }
+        // { path: 'ingredients', component: ingredients }
       ]
     },
     { path: '/connect', component: Connect }

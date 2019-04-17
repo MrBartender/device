@@ -1,14 +1,12 @@
 export class gpio {
-
     constructor(pin, pwr){
         this.pin = pin
-        this.pwr = pwr
-        this.state = 0
+        this.state = (pwr == 'high') ? 1 : 0
     }    
 
     writeSync(state){
         this.state = state
-        return state
+        return this.state
     }
 
     readSync(){

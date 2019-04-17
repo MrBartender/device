@@ -2,6 +2,7 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
+const conditionalLoader = require('webpack-conditional-loader')
 require("babel-polyfill")
 
 const frontendConfig = {
@@ -20,9 +21,7 @@ const frontendConfig = {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader'
-          }
+          use: [{loader: 'babel-loader'}, {loader:'webpack-conditional-loader'}],
         },
         {
           test: /\.scss$/,
@@ -63,9 +62,7 @@ const frontendConfig = {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader'
-          }
+          use: [{loader: 'babel-loader'}, {loader:'webpack-conditional-loader'}],
         },
       ]
     },

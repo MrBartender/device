@@ -4,8 +4,6 @@
 
 <script>
 
-import { pumps } from '@/data/pumps'
-
 export default {
   name: 'pumpTester',
   props: {
@@ -26,13 +24,13 @@ export default {
     startPump() {
       this._postAction('/startPump', this.number)
         .then((response) => {
-          console.log('Start on ' + this.number + ', response: ' + JSON.stringify(response))
+          console.log('Start pump ' + this.number + ', response: ' + JSON.stringify(response))
         })
     },
     stopPump() {
       this._postAction('/stopPump', this.number)
         .then((response) => {
-          console.log('Stop on ' + this.number + ', response: ' + JSON.stringify(response))
+          console.log('Stop pump ' + this.number + ', response: ' + JSON.stringify(response))
         })
     }
   }

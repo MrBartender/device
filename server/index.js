@@ -11,8 +11,8 @@ const wifi = require('node-wifi')
 const path = require('path')
 const app = express()
 
-import { pumps, id_of, turn_on, turn_off, power_to } from '@/data/pumps'
-
+import { pumps } from '@/data/pumps'
+console.log(process.env.NODE_ENV) 
 
 // Init the wifi module
 wifi.init({
@@ -52,21 +52,27 @@ app.get('/scan', (req, res) => {
     })
 })
 
+// Get a pump by id
+app.get('/pump', (req, res) => {
+  const id = req.body.id
+  res.send({pump: pumps[id]})
+})
+
 // Start a pump by id
 app.post('/startPump', (req, res) => {
-  let pump_id = (req.body.id).toString()
-  const pump = pumps[pump_id]
-  console.log('Turning on pump ' + id_of(pump))
-  const result = turn_on(power_to(pump))
+  let id = req.body.id
+  const pump = pumps[id]
+  console.log('Turning on pump ' + pump.id)
+  const result = pump.start()
   res.send({ pump })
 })
 
 // Stop a pump by id
 app.post('/stopPump', (req, res) => {
-  let pump_id = (req.body.id).toString()
-  const pump = pumps[pump_id]
-  console.log('Turning off pump ' + id_of(pump))
-  const result = turn_off(power_to(pump))
+  let id = req.body.id
+  const pump = pumps[id]
+  console.log('Turning off pump ' + pump.id)
+  const result = pump.stop()
   res.send({ pump })
 })
 
