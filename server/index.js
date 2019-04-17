@@ -4,30 +4,15 @@ const express = require('express')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
 
-const gpio = require('onoff').Gpio
+// const gpio = require('onoff').Gpio
 const isOnline = require('is-online')
 const wifi = require('node-wifi')
 
 const path = require('path')
 const app = express()
 
-// Initialize pumps
-let nums = [ 2, 3, 4, 5, 6, 13, 14, 15, 17, 18, 19, 26 ]
+import { pumps, id_of, turn_on, turn_off, power_to } from '@/data/pumps'
 
-let pumps = {
-  '1': new gpio(26, 'high'),
-  '2': new gpio(19, 'high'),
-  '3': new gpio(13, 'high'),
-  '4': new gpio(6, 'high'),
-  '5': new gpio(5, 'high'),
-  '6': new gpio(2, 'high'),
-  '7': new gpio(3, 'high'),
-  '8': new gpio(4, 'high'),
-  '9': new gpio(17, 'high'),
-  '10': new gpio(14, 'high'),
-  '11': new gpio(15, 'high'),
-  '12': new gpio(18, 'high')
-}
 
 // Init the wifi module
 wifi.init({
@@ -39,14 +24,14 @@ wifi.init({
 app.use(helmet())
 
 // Serve static files
-app.use(express.static(path.join(__dirname, '..', 'public')))
+app.use(express.static(path.resolve('./public')))
 
 // Parse Post data
 app.use(bodyParser.json())
 
 // handle base route - interrupt if no internet connection
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+  res.sendFile('index.html', { root: './public' })
 })
 
 // get internet status
@@ -70,31 +55,19 @@ app.get('/scan', (req, res) => {
 // Start a pump by id
 app.post('/startPump', (req, res) => {
   let pump_id = (req.body.id).toString()
-
-  console.log('Turning on pump ' + pump_id)
-  pumps[pump_id].writeSync(0)
-
-  res.send({
-    pump: {
-      id: pump_id,
-      status: pumps[pump_id].readSync()
-    }
-  })
+  const pump = pumps[pump_id]
+  console.log('Turning on pump ' + id_of(pump))
+  const result = turn_on(power_to(pump))
+  res.send({ pump })
 })
 
 // Stop a pump by id
 app.post('/stopPump', (req, res) => {
   let pump_id = (req.body.id).toString()
-  
-  console.log('Turning off pump ' + pump_id)
-  pumps[pump_id].writeSync(1)
-
-  res.send({
-    pump: {
-      id: pump_id,
-      status: pumps[pump_id].readSync()
-    }
-  })
+  const pump = pumps[pump_id]
+  console.log('Turning off pump ' + id_of(pump))
+  const result = turn_off(power_to(pump))
+  res.send({ pump })
 })
 
 // Run the device server

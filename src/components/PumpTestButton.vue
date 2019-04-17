@@ -3,6 +3,9 @@
 </template>
 
 <script>
+
+import { pumps } from '@/data/pumps'
+
 export default {
   name: 'pumpTester',
   props: {
