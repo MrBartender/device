@@ -5,7 +5,8 @@ import vueRouter from 'vue-router'
 import test from './views/test/layout.vue'
 import pumps from './views/test/pumps.vue'
 import recipes from './views/test/recipes.vue'
-import ingredients from './views/test/ingredients.vue'
+import pour from './views/test/pour.vue'
+import listener from './views/test/listener.vue'
 import Connect from './views/connect'
 
 // Init Plugin
@@ -20,7 +21,8 @@ const router = new vueRouter({
       children: [
         { path: 'pumps', component: pumps },
         { path: 'recipes', component: recipes },
-        // { path: 'ingredients', component: ingredients }
+        { path: 'pour', name: 'pour', component: pour, props: true },
+        { path: 'listener', component: listener },
       ]
     },
     { path: '/connect', component: Connect }

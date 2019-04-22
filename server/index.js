@@ -11,8 +11,14 @@ const wifi = require('node-wifi')
 const path = require('path')
 const app = express()
 
+
 import { pumps } from '@/data/pumps'
-console.log(process.env.NODE_ENV) 
+
+
+const AWS = require('aws-sdk')
+AWS.config.update({region: 'us-east-1'})
+var sqs = new AWS.SQS({apiVersion: '2012-11-05'})
+var queue_url = 'https://sqs.us-east-1.amazonaws.com/996076014670/TestQueue'
 
 // Init the wifi module
 wifi.init({
@@ -52,10 +58,51 @@ app.get('/scan', (req, res) => {
     })
 })
 
+// pop next order message from sqs queue
+app.get('/queue/next', (req, res) => {
+  var params = {
+    AttributeNames: [
+        "SentTimestamp"
+    ],
+    MaxNumberOfMessages: 1,
+    MessageAttributeNames: [
+        ".*" //get all attributes
+    ],
+    QueueUrl: queue_url,
+    VisibilityTimeout: 20,
+    WaitTimeSeconds: 10
+  }
+  sqs.receiveMessage(params, function(err, data) {
+    if (err) {
+      console.log("Receive Error", err)
+      res.send(false)
+    } else if (data.Messages) {
+      
+      var order = data.Messages[0]
+      console.log("Message retrieved", data.Messages[0].MessageId)
+      res.send({ order })
+
+      var deleteParams = {
+        QueueUrl: queue_url,
+        ReceiptHandle: data.Messages[0].ReceiptHandle
+      }
+      sqs.deleteMessage(deleteParams, function(err, data) {
+        if (err) {
+          console.log("Delete Error", err)
+        } else {
+          console.log("Message Deleted", data)
+        }
+      })
+    } else {
+      res.send(false)
+    }
+  })
+})
+
 // Get a pump by id
 app.get('/pump', (req, res) => {
   const id = req.body.id
-  res.send({pump: pumps[id]})
+  res.send({ pump: pumps[id] })
 })
 
 // Start a pump by id
@@ -76,6 +123,14 @@ app.post('/stopPump', (req, res) => {
   res.send({ pump })
 })
 
+app.post('/device/pourCode', (req, res) => {
+  // update pour code in dynamoDB
+})
+
+app.get('/order', (req, res) => {
+  // get order from dynamoDB
+})
+
 // Run the device server
 app.listen(3000, () => console.log('MrBartender listening on port 3000!'))
 
@@ -86,3 +141,5 @@ process.on('exit', () => {
     pumps[i.toString()].unexport()
   }
 })
+
+
