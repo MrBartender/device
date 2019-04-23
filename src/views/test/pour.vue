@@ -1,6 +1,6 @@
 <template>
   <div class="middle">
-    <pour-button></pour-button>
+    <pour-button :order="timings" ></pour-button>
   </div>
 </template>
 
@@ -13,8 +13,30 @@ export default {
     'pour-button': PourOrderButton
   },
   props: {
-    order: Object
-  }
+    order_id: String
+  },
+  data () {
+    return {
+      timings: null,
+    }
+  },
+  methods: {
+    __postAction: async function(id) {
+      return fetch('/order', {
+        method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ order_id: id })
+      }).then(response => response.json())
+    },
+  },
+  mounted(){
+    this.__postAction(this.order_id).then((response) => {
+      this.$data.timings = response
+    })
+  },
 }
 </script>
 

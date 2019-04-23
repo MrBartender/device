@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="recipes">
     <recipe-view :recipe="selected" class="full-width"></recipe-view>
     <select v-model="selected">
       <option v-for="recipe in recipes" :key="recipe[name]" :value="recipe">
@@ -15,7 +15,9 @@ import recipeView from '@/components/recipe.vue'
 
 export default {
   name: 'recipes-test',
-  data: () => ({ recipes, selected: recipes[first], name, first }),
+  data () {
+    return { recipes, selected: recipes[first], name, first }
+  },
   components: { recipeView }
 }
 </script>
@@ -24,6 +26,9 @@ export default {
 .full-width {
   width: 100vw;
   margin-bottom: 20px;
+}
+.recipes {
+  margin: 10px
 }
 </style>
 

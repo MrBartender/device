@@ -16,22 +16,21 @@
       <pump-button :number="11"></pump-button>
       <pump-button :number="12"></pump-button>
     </div>
+    <pump-timer></pump-timer>
   </div>
 </template>
 
 <script>
 import PumpTestButton from '@/components/PumpTestButton.vue'
+import PumpTestTimer from '@/components/PumpTestTimer.vue'
 
 export default {
   name: 'test',
   components: {
-    'pump-button': PumpTestButton
+    'pump-button': PumpTestButton,
+    'pump-timer': PumpTestTimer
   },
-  data () {
-    return {
-      message: 'Testing!'
-    }
-  }
+  
 }
 </script>
 

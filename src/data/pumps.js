@@ -1,9 +1,12 @@
+/// #if DEV
 import { gpio } from '@/data/gpio'
-
+/// #else
+import { Gpio as gpio } from 'onoff'
+/// #endif
 
 const nums = [ 2, 3, 4, 5, 6, 13, 14, 15, 17, 18, 19, 26 ]
 
-class pump {
+export class pump {
   constructor(id, pin, tube_length, ready_time){
     this.id = id
     this.gpio = new gpio(pin, 'high')
@@ -12,13 +15,22 @@ class pump {
   }
 
   start () {
+    console.log('starting pump', this.id)
     this.gpio.writeSync(0)
     return this.gpio.readSync()
   }
-
+  
   stop () {
+    console.log('stopping pump', this.id)
     this.gpio.writeSync(1)
     return this.gpio.readSync()
+  }
+
+  async pour_for (ms) {
+    this.start()
+    await new Promise(r => setTimeout(r, ms))
+    this.stop()
+    return this
   }
 }
 
@@ -37,9 +49,9 @@ export const pumps = [
   new pump( 12, 18, 25, 110 )
 ]
 
-export const id_of = (pump) => pump.id
-export const power_to = (pump) => pump.gpio
-export const tube_length = (pump) => pump.tube_length
-
-// time in ms for pump to fill tube
-export const ready_time = (pump) => pump.ready_time
+export async function pour (order) {
+  for (var pump of order.pumps) {
+      let ms = pump.ms 
+      await pumps[pump.id - 1].pour_for(ms)
+  }
+}

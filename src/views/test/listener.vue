@@ -5,10 +5,8 @@
 </template>
 
 <script>
-import PourCodeDisplay from '@/components/PourCodeDisplay';
-// import  router  from '@/router'
 
-var order
+import PourCodeDisplay from '@/components/PourCodeDisplay';
 
 export default {
   name: 'test',
@@ -16,26 +14,25 @@ export default {
     'pour-code-display': PourCodeDisplay
   },
   methods: {
+     __getAction: async function() {
+       const response = await fetch('/queue/next', {method:'get'})
+       return await response.json()
+    },
     watchQueue: function () {
       console.log('polling...')
       this.__getAction().then((response) => {
         if(response){
-          console.log('order found')
-          this.$router.push({name: 'pour', params: {order: response}})
+          console.log('found order', response.order_id)
+          this.$router.push({name: 'pour', params: {order_id: response.order_id}})
         } else {
-          console.log('no orders found during poll')
+          console.log('...no orders found during poll')
           this.watchQueue()
         }
       })
-    },
-    __getAction: async function() {
-      const result = await fetch('/queue/next', { method: 'get'})
-      return await result.json() 
     }
   },
   mounted(){
-    setTimeout(this.watchQueue, 1500)
-    // this.watchQueue()
+    this.watchQueue()
   }
 }
 </script>

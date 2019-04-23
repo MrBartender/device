@@ -28,3 +28,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.recipes {
+  margin: 10px;
+}
+</style>
+

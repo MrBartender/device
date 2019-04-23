@@ -24,12 +24,14 @@ export default {
     startPump() {
       this._postAction('/startPump', this.number)
         .then((response) => {
+          this.$root.$emit('timer-start')
           console.log('Start pump ' + this.number + ', response: ' + JSON.stringify(response))
         })
     },
     stopPump() {
       this._postAction('/stopPump', this.number)
         .then((response) => {
+          this.$root.$emit('timer-stop')
           console.log('Stop pump ' + this.number + ', response: ' + JSON.stringify(response))
         })
     }

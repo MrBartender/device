@@ -2,8 +2,11 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
-const conditionalLoader = require('webpack-conditional-loader')
 require("babel-polyfill")
+
+const opts = {
+  DEV: false,
+}
 
 const frontendConfig = {
     target: 'web',
@@ -21,7 +24,10 @@ const frontendConfig = {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          use: [{loader: 'babel-loader'}, {loader:'webpack-conditional-loader'}],
+          use: [
+            {loader: 'babel-loader'},
+            {loader:'ifdef-loader', options: opts}
+          ],
         },
         {
           test: /\.scss$/,
@@ -62,7 +68,10 @@ const frontendConfig = {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          use: [{loader: 'babel-loader'}, {loader:'webpack-conditional-loader'}],
+          use: [
+            {loader: 'babel-loader'},
+            {loader:'ifdef-loader', options: opts}
+          ],
         },
       ]
     },
@@ -78,4 +87,9 @@ const frontendConfig = {
    }
   }  
 
-  module.exports = [frontendConfig, backendConfig]
+  module.exports = (env, argv) => {
+    if (argv.mode === 'development') {
+      opts.DEV = true
+    }
+    return [frontendConfig, backendConfig];
+  }

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ $1 == "" ]]; then
+  cd /home/kiosk-user/mrbartender
+elif [[ $1 == "update" ]]; then
+  cd /home/kiosk-user/mrbartender
+  git pull origin master
+  cp ./kiosk/autostart /etc/xdg/openbox/autostart
+  cp ./kiosk/credentials ~/.aws/credentials
+  cp ./kiosk/mb_device /bin/mb
+fi

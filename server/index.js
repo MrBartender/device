@@ -10,14 +10,17 @@ const wifi = require('node-wifi')
 
 const path = require('path')
 const app = express()
-
+const AWS = require('aws-sdk')
 
 import { pumps } from '@/data/pumps'
 
 
-const AWS = require('aws-sdk')
+var credentials = new AWS.SharedIniFileCredentials({profile: 'prototype'})
+AWS.config.credentials = credentials
 AWS.config.update({region: 'us-east-1'})
+
 var sqs = new AWS.SQS({apiVersion: '2012-11-05'})
+
 var queue_url = 'https://sqs.us-east-1.amazonaws.com/996076014670/TestQueue'
 
 // Init the wifi module
@@ -78,9 +81,9 @@ app.get('/queue/next', (req, res) => {
       res.send(false)
     } else if (data.Messages) {
       
-      var order = data.Messages[0]
+      var message = data.Messages[0]
       console.log("Message retrieved", data.Messages[0].MessageId)
-      res.send({ order })
+      res.send({ order_id: message.Body })
 
       var deleteParams = {
         QueueUrl: queue_url,
@@ -99,16 +102,23 @@ app.get('/queue/next', (req, res) => {
   })
 })
 
+app.post('/order', (req, res) => {
+  let order_id = req.body.order_id
+  console.log('retrieving order', order_id)
+  // TODO: API call goes here
+  res.send({ pumps: [{id:1, ms:2000},{id:2, ms:2000}] }) // for testing
+})
+
 // Get a pump by id
 app.get('/pump', (req, res) => {
-  const id = req.body.id
-  res.send({ pump: pumps[id] })
+  let id = req.body.id
+  res.send({ pump: pumps[id-1] })
 })
 
 // Start a pump by id
 app.post('/startPump', (req, res) => {
   let id = req.body.id
-  const pump = pumps[id]
+  const pump = pumps[id-1]
   console.log('Turning on pump ' + pump.id)
   const result = pump.start()
   res.send({ pump })
@@ -117,18 +127,10 @@ app.post('/startPump', (req, res) => {
 // Stop a pump by id
 app.post('/stopPump', (req, res) => {
   let id = req.body.id
-  const pump = pumps[id]
+  const pump = pumps[id-1]
   console.log('Turning off pump ' + pump.id)
   const result = pump.stop()
   res.send({ pump })
-})
-
-app.post('/device/pourCode', (req, res) => {
-  // update pour code in dynamoDB
-})
-
-app.get('/order', (req, res) => {
-  // get order from dynamoDB
 })
 
 // Run the device server
@@ -141,5 +143,3 @@ process.on('exit', () => {
     pumps[i.toString()].unexport()
   }
 })
-
-
