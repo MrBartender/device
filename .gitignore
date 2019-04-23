@@ -6,3 +6,5 @@ node_modules/
 
 # Npm logs
 npm-debug.log
+
+kiosk/credentials
