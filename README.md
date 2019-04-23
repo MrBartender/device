@@ -6,7 +6,8 @@ This repository is the On-Device code for a bartender in the MrBartender suite.
 Start with Raspbian Lite Image.
 
 - node.js (`v10.12`)
-- forever (npm - `forever`)
+- mongodb
+- pm2
 - unclutter
 - chromium-browser
 - xorg
@@ -52,6 +53,10 @@ Run the following commands:
 That should update everything necessary.
 
 ## Developing
+
+Copy helper script:
+`$ cp ./kiosk/mb_local /bin/mb`
+_add execute permission_
 
 Development watch script (from root dir):
 `$ watchify src/core.js -o public/js/bundle.js & nodemon index.js`
