@@ -20,16 +20,6 @@ AWS.config.update({region: 'us-east-1'})
 var sqs = new AWS.SQS({apiVersion: '2012-11-05'})
 var queue_url = 'https://sqs.us-east-1.amazonaws.com/996076014670/TestQueue'
 
-// let static_path = path.resolve(__dirname, 'home', 'kiosk-user', 'mrbartender', 'public')
-let static_path = path.resolve(__dirname, 'mrbartender', 'public')
-
-// let base_path = path.resolve(__dirname, 'home', 'kiosk-user', 'mrbartender','public', 'index.html')  
-let base_path = path.resolve(__dirname, 'mrbartender','public', 'index.html')  
-
-console.log(__dirname)
-console.log(static_path)
-console.log(base_path)
-
 // Init the wifi module
 wifi.init({
   // network interface, choose a random wifi interface if set to null
@@ -40,17 +30,14 @@ wifi.init({
 app.use(helmet())
 
 // Serve static files
-// app.use(express.static(static_path))
-app.use(express.static(path.resolve('./mrbartender/public')))
+app.use(express.static(path.resolve('./public')))
 
 // Parse Post data
 app.use(bodyParser.json())
 
 // handle base route - interrupt if no internet connection
 app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: './mrbartender/public/build' })
-  // res.sendFile(path.resolve('mrbartender','public', 'index.html'))
-  // res.sendFile(base_path)
+  res.sendFile('index.html', { root: './public/build' })
 })
 
 // get internet status
