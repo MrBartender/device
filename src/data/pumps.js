@@ -52,6 +52,6 @@ export const pumps = [
 export async function pour (order) {
   for (var pump of order.pumps) {
       let ms = pump.ms 
-      await pumps[pump.id - 1].pour_for(ms)
+      pumps[pump.id - 1].pour_for(ms)
   }
 }
