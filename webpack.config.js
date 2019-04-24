@@ -39,7 +39,7 @@ const frontendConfig = {
         }
       ]
     },
-    externals: [nodeExternals()],
+    externals: [ 'onoff' ],
     plugins: [
       new VueLoaderPlugin(),
       new HtmlWebpackPlugin({
