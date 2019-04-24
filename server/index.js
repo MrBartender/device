@@ -37,8 +37,8 @@ app.use(bodyParser.json())
 
 // handle base route - interrupt if no internet connection
 app.get('/', (req, res) => {
-  // res.sendFile('index.html', { root: './public' })
-  res.sendFile(path.resolve(__dirname, '..', '..', 'public', 'index.html'))
+  res.sendFile('index.html', { root: './public' })
+  // res.sendFile(path.resolve(__dirname, '..', '..', 'public', 'index.html'))
 })
 
 // get internet status
