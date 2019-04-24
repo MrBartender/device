@@ -1,8 +1,4 @@
-/// #if DEV
-import { gpio } from '@/data/gpio'
-/// #else
 import { Gpio as gpio } from 'onoff'
-/// #endif
 
 const nums = [ 2, 3, 4, 5, 6, 13, 14, 15, 17, 18, 19, 26 ]
 
