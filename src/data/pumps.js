@@ -12,14 +12,14 @@ export class pump {
 
   start () {
     console.log('starting pump', this.id)
-    this.gpio.writeSync(0)
-    return this.gpio.readSync()
+    // this.gpio.writeSync(0)
+    // return this.gpio.readSync()
   }
   
   stop () {
     console.log('stopping pump', this.id)
-    this.gpio.writeSync(1)
-    return this.gpio.readSync()
+    // this.gpio.writeSync(1)
+    // return this.gpio.readSync()
   }
 
   async pour_for (ms) {
