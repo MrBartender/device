@@ -81,10 +81,7 @@ const frontendConfig = {
       alias: {
         '@': path.resolve(__dirname, 'src'),
       }
-    },
-    node: {
-      fs: "empty"
-   }
+    }
   }  
 
   module.exports = (env, argv) => {
