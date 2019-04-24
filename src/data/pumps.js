@@ -1,7 +1,7 @@
-/// #if DEV
-import { gpio } from '@/data/gpio'
-/// #else
 import { Gpio as gpio } from 'onoff'
+/// #if DEV
+// import { gpio } from '@/data/gpio'
+/// #else
 /// #endif
 
 const nums = [ 2, 3, 4, 5, 6, 13, 14, 15, 17, 18, 19, 26 ]
@@ -52,6 +52,6 @@ export const pumps = [
 export async function pour (order) {
   for (var pump of order.pumps) {
       let ms = pump.ms 
-      pumps[pump.id - 1].pour_for(ms)
+       pumps[pump.id - 1].pour_for(ms)
   }
 }
