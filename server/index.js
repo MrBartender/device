@@ -30,14 +30,15 @@ wifi.init({
 app.use(helmet())
 
 // Serve static files
-app.use(express.static(path.resolve('./public')))
+app.use(express.static(path.join(__dirname, '..', '/public')))
 
 // Parse Post data
 app.use(bodyParser.json())
 
 // handle base route - interrupt if no internet connection
 app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: './public' })
+  // res.sendFile('index.html', { root: './public' })
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
 // get internet status
