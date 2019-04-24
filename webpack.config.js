@@ -42,7 +42,7 @@ const frontendConfig = {
     plugins: [
       new VueLoaderPlugin(),
       new HtmlWebpackPlugin({
-        template: './src/index.html',
+        template: './src/index.html'
       })
     ],
     resolve: {
