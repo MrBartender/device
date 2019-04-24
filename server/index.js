@@ -30,7 +30,7 @@ wifi.init({
 app.use(helmet())
 
 // Serve static files
-app.use(express.static(path.resolve(__dirname, 'home/kiosk-user/mrbartender/public')))
+app.use(express.static(path.resolve('./mrbartender/public')))
 
 // Parse Post data
 app.use(bodyParser.json())
@@ -38,7 +38,7 @@ app.use(bodyParser.json())
 // handle base route - interrupt if no internet connection
 app.get('/', (req, res) => {
   // res.sendFile('index.html', { root: './mrbartender/public/build' })
-  res.sendFile(path.resolve(__dirname, 'home/kiosk-user/mrbartender/public/index.html'))
+  res.sendFile(path.resolve('./mrbartender/public/index.html'))
 })
 
 // get internet status
