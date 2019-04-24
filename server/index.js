@@ -30,6 +30,7 @@ wifi.init({
 app.use(helmet())
 
 // Serve static files
+// app.use(express.static(path.resolve(__dirname, './public')))
 app.use(express.static(path.resolve(__dirname, 'home/kiosk-user/mrbartender/public')))
 
 // Parse Post data
