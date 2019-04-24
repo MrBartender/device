@@ -9,7 +9,7 @@ const opts = {
 }
 
 const frontendConfig = {
-    target: 'node',
+    target: 'web',
     entry: ['babel-polyfill', './src/core.js'],
     output: {
       path: path.resolve(__dirname, 'public')
@@ -51,6 +51,9 @@ const frontendConfig = {
         '@': path.resolve(__dirname, 'src'),
       }
     },
+    node: {
+      fs: "empty"
+   }
   }
 
   const backendConfig = {
@@ -79,6 +82,9 @@ const frontendConfig = {
         '@': path.resolve(__dirname, 'src'),
       }
     },
+    node: {
+      fs: "empty"
+   }
   }  
 
   module.exports = (env, argv) => {
