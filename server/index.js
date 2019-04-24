@@ -41,14 +41,14 @@ app.use(helmet())
 
 // Serve static files
 // app.use(express.static(static_path))
-app.use(express.static(path.resolve('./public')))
+app.use(express.static(path.resolve('./mrbartender/public')))
 
 // Parse Post data
 app.use(bodyParser.json())
 
 // handle base route - interrupt if no internet connection
 app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: './public/build' })
+  res.sendFile('index.html', { root: './mrbartender/public/build' })
   // res.sendFile(path.resolve('mrbartender','public', 'index.html'))
   // res.sendFile(base_path)
 })
