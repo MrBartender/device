@@ -4,7 +4,6 @@ const express = require('express')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
 
-// const gpio = require('onoff').Gpio
 const isOnline = require('is-online')
 const wifi = require('node-wifi')
 
@@ -14,13 +13,11 @@ const AWS = require('aws-sdk')
 
 import { pumps } from '@/data/pumps'
 
-
 var credentials = new AWS.SharedIniFileCredentials({profile: 'prototype'})
 AWS.config.credentials = credentials
 AWS.config.update({region: 'us-east-1'})
 
 var sqs = new AWS.SQS({apiVersion: '2012-11-05'})
-
 var queue_url = 'https://sqs.us-east-1.amazonaws.com/996076014670/TestQueue'
 
 // Init the wifi module
@@ -73,7 +70,7 @@ app.get('/queue/next', (req, res) => {
     ],
     QueueUrl: queue_url,
     VisibilityTimeout: 20,
-    WaitTimeSeconds: 10
+    WaitTimeSeconds: 3
   }
   sqs.receiveMessage(params, function(err, data) {
     if (err) {

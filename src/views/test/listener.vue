@@ -14,7 +14,7 @@ export default {
     'pour-code-display': PourCodeDisplay
   },
   methods: {
-     __getAction: async function() {
+     __getAction: async function () {
        const response = await fetch('/queue/next', {method:'get'})
        return await response.json()
     },
@@ -25,15 +25,15 @@ export default {
           console.log('found order', response.order_id)
           this.$router.push({name: 'pour', params: {order_id: response.order_id}})
         } else {
-          console.log('...no orders found during poll')
+          console.log('...no orders found')
           this.watchQueue()
         }
       })
     }
   },
-  mounted(){
+  mounted () {
     this.watchQueue()
-  }
+  },
 }
 </script>
 

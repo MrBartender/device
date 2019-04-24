@@ -14,7 +14,7 @@ export default {
     }
   },
   methods: {
-    generateCode(digits){
+    generateCode (digits) {
         let num = Math.floor(((Math.random() * (Math.pow(10, digits))) + 1)).toString()
         let code = num.padStart(digits, '0')
         // TODO: update pour code in DB
