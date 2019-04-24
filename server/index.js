@@ -22,6 +22,8 @@ var queue_url = 'https://sqs.us-east-1.amazonaws.com/996076014670/TestQueue'
 
 let static_path = path.resolve(__dirname, 'home', 'kiosk-user', 'mrbartender', 'public')
 let base_path = path.resolve(__dirname, 'home', 'kiosk-user', 'mrbartender','public', 'index.html')  
+
+console.log(__dirname)
 console.log(static_path)
 console.log(base_path)
 
