@@ -21,19 +21,19 @@ export default {
     }
   },
   methods: {
-    __postAction: async function(id) {
-      return fetch('/order', {
-        method: 'post',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ order_id: id })
-      }).then(response => response.json())
+    __getAction: async function(id) {
+      const response = await fetch(
+        'https://cye04n3769.execute-api.us-east-1.amazonaws.com/dev/pour/getorder?orderID='+this.order_id, 
+        {
+          method: 'GET',
+        })
+        return await response.json()
+
     },
   },
   mounted(){
-    this.__postAction(this.order_id).then((response) => {
+    this.__getAction(this.order_id).then((response) => {
+      console.log(response)
       this.$data.timings = response
     })
   },

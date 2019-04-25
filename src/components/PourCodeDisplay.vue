@@ -14,11 +14,22 @@ export default {
     }
   },
   methods: {
+    __postAction: async (code) => {
+      const response = await fetch('/code',  {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ code: code })
+      })
+      return await response.json()
+
+    },
     generateCode (digits) {
-        let num = Math.floor(((Math.random() * (Math.pow(10, digits))) + 1)).toString()
-        let code = num.padStart(digits, '0')
-        // TODO: update pour code in DB
-        return code
+      let num = Math.floor(((Math.random() * (Math.pow(10, digits))) + 1)).toString()
+      let code = num.padStart(digits, '0')
+      return this.__postAction(code).then(response)
     }
   },
 }

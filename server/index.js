@@ -11,7 +11,11 @@ const path = require('path')
 const app = express()
 const AWS = require('aws-sdk')
 
+import Amplify, { API, graphqlOperation} from 'aws-amplify'
+import { updatePourCode } from './graphql'
 import { pumps, pour } from '@/data/pumps'
+
+const device_id = "0"
 
 var credentials = new AWS.SharedIniFileCredentials({profile: 'prototype'})
 AWS.config.credentials = credentials
@@ -19,6 +23,15 @@ AWS.config.update({region: 'us-east-1'})
 
 var sqs = new AWS.SQS({apiVersion: '2012-11-05'})
 var queue_url = 'https://sqs.us-east-1.amazonaws.com/996076014670/TestQueue'
+
+var amplifyConfig = {
+    'aws_appsync_graphqlEndpoint': 'https://vavmylvolzhqvmrotqcaleapra.appsync-api.us-east-1.amazonaws.com/graphql',
+    'aws_appsync_region': 'us-east-1',
+    'aws_appsync_authenticationType': 'API_KEY',
+    'aws_appsync_apiKey': 'da2-rfinu4opufexzbxykzg62wajoe',
+}
+Amplify.configure(amplifyConfig)
+
 
 // Init the wifi module
 wifi.init({
@@ -30,16 +43,22 @@ wifi.init({
 app.use(helmet())
 
 // Serve static files
-// app.use(express.static(path.resolve('./public')))
+/// #if DEV
+app.use(express.static(path.resolve('./public')))
+/// #else
 app.use(express.static(path.resolve(__dirname, 'home/kiosk-user/mrbartender/public')))
+/// #endif
 
 // Parse Post data
 app.use(bodyParser.json())
 
 // handle base route - interrupt if no internet connection
 app.get('/', (req, res) => {
-  // res.sendFile('index.html', { root: './public/build' })
+  /// #if DEV
+  res.sendFile('index.html', { root: './public/build' })
+  /// #else
   res.sendFile(path.resolve(__dirname, 'home/kiosk-user/mrbartender/public/index.html'))
+  /// #endif
 })
 
 // get internet status
@@ -108,13 +127,21 @@ app.post('/order/pour', (req, res) => {
   })
 })
 
-app.post('/order', (req, res) => {
-  let order_id = req.body.order_id
-  console.log(req.body)
-  console.log('retrieving order', order_id)
-  // TODO: API call goes here
-  res.send({ pumps: [{id:1, ms:2000},{id:2, ms:2000}] }) // for testing
+app.post('/code', async (req, res) => {
+  let code = req.body.code
+  const response = await API.graphql(graphqlOperation(updatePourCode, {id: device_id, pourCode: code}))
+  return response.data.updateDevice.pourCode
 })
+
+// app.post('/order', (req, res) => {
+//   let order_id = req.body.order_id
+//   console.log(req.body)
+//   console.log('retrieving order', order_id)
+//   const timings = fetch('https://cye04n3769.execute-api.us-east-1.amazonaws.com/dev/pour/getorder?orderID='+order_id, {method: 'get'})
+//   console.log(timings)
+//   res.send({ timings })
+//   // res.send({ pumps: [{id:1, ms:2000},{id:2, ms:2000}] }) // for testing
+// })
 
 // Get a pump by id
 app.get('/pump', (req, res) => {

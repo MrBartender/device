@@ -50,9 +50,11 @@ export const pumps = [
 ]
 
 export async function pour (order) {
-  for (var pump of order.pumps) {
-      let ms = pump.ms 
-      await pumps[pump.id - 1].pour_for(ms)
+  for (var pump in order) {
+    if (order.hasOwnProperty(pump)){
+      let ms = order[pump] 
+      await pumps[parseInt(pump) - 1].pour_for(ms)
+    }
   }
   return true
 }
