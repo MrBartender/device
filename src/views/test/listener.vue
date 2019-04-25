@@ -9,7 +9,7 @@
 import PourCodeDisplay from '@/components/PourCodeDisplay';
 
 export default {
-  name: 'test',
+  name: 'listener-test',
   components: {
     'pour-code-display': PourCodeDisplay
   },
@@ -22,7 +22,7 @@ export default {
       console.log('polling...')
       this.__getAction().then((response) => {
         if(response){
-          console.log('found order', response.order_id)
+          console.log('...found order', response.order_id)
           this.$router.push({name: 'pour', params: {order_id: response.order_id}})
         } else {
           console.log('...no orders found')

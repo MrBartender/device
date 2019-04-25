@@ -25,7 +25,7 @@ import PumpTestButton from '@/components/PumpTestButton.vue'
 import PumpTestTimer from '@/components/PumpTestTimer.vue'
 
 export default {
-  name: 'test',
+  name: 'pumps-test',
   components: {
     'pump-button': PumpTestButton,
     'pump-timer': PumpTestTimer

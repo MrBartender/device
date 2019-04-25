@@ -30,6 +30,7 @@
     "onoff": "^3.2.9",
     "vue": "^2.6.2",
     "vue-router": "^3.0.2",
+    "vue2-circle-progress": "^1.2.3",
     "vue2-touch-events": "^1.1.2",
     "webpack-node-externals": "^1.7.2"
   },

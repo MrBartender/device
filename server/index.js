@@ -11,11 +11,11 @@ const path = require('path')
 const app = express()
 const AWS = require('aws-sdk')
 
-import Amplify, { API, graphqlOperation} from 'aws-amplify'
+import Amplify, { API, graphqlOperation } from 'aws-amplify'
 import { updatePourCode } from './graphql'
 import { pumps, pour } from '@/data/pumps'
 
-const device_id = "0"
+const device_id = "ea9f0cd1-aaff-4bb4-a7a2-d561d495b2a3"
 
 var credentials = new AWS.SharedIniFileCredentials({profile: 'prototype'})
 AWS.config.credentials = credentials
@@ -120,7 +120,7 @@ app.get('/queue/next', (req, res) => {
   })
 })
 
-app.post('/order/pour', (req, res) => {
+app.post('/order/pour', async (req, res) => {
   let timings = req.body.timings
   pour(timings).then((response) => {
     res.send({ status:'success' })
@@ -129,8 +129,15 @@ app.post('/order/pour', (req, res) => {
 
 app.post('/code', async (req, res) => {
   let code = req.body.code
-  const response = await API.graphql(graphqlOperation(updatePourCode, {id: device_id, pourCode: code}))
-  return response.data.updateDevice.pourCode
+  console.log(code)
+  API.graphql(graphqlOperation(updatePourCode, {input: {id: device_id, pourCode: code}}))
+    .then(response => {
+      console.log(response)
+      res.send({ code: response.data.updateDevice.pourCode })
+    })
+    .catch(error => {
+      console.error(error)
+    })
 })
 
 // app.post('/order', (req, res) => {
@@ -165,6 +172,10 @@ app.post('/stopPump', (req, res) => {
   console.log('Turning off pump ' + pump.id)
   const result = pump.stop()
   res.send({ pump })
+})
+
+app.get('/recipes', (req, res) => {
+  //TODO: 
 })
 
 // Run the device server

@@ -15,13 +15,13 @@ export class pump {
   }
 
   start () {
-    // console.log('starting pump', this.id)
+    console.log('starting pump', this.id)
     this.gpio.writeSync(0)
     return this.gpio.readSync()
   }
   
   stop () {
-    // console.log('stopping pump', this.id)
+    console.log('stopping pump', this.id)
     this.gpio.writeSync(1)
     return this.gpio.readSync()
   }
@@ -49,11 +49,11 @@ export const pumps = [
   new pump( 12, 18, 25, 110 )
 ]
 
-export async function pour (order) {
-  for (var pump in order) {
-    if (order.hasOwnProperty(pump)){
-      let ms = order[pump] 
-      await pumps[parseInt(pump) - 1].pour_for(ms)
+export async function pour (timings) {
+  for (var pump in timings) {
+    if (timings.hasOwnProperty(pump)){
+      let ms = timings[pump] 
+      pumps[parseInt(pump) - 1].pour_for(ms)
     }
   }
   return true

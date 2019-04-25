@@ -1,5 +1,5 @@
 <template>
-  <h1 class="display">Pour Code: {{ code }}</h1>
+  <p class="display">Pour Code: {{ code }}</p>
 </template>
 
 <script>
@@ -10,7 +10,8 @@ export default {
   },
   data () {
     return {
-      code: this.generateCode(4)
+      code: null
+      // code: this.generateCode(4)
     }
   },
   methods: {
@@ -24,14 +25,27 @@ export default {
         body: JSON.stringify({ code: code })
       })
       return await response.json()
+      
 
     },
-    generateCode (digits) {
-      let num = Math.floor(((Math.random() * (Math.pow(10, digits))) + 1)).toString()
-      let code = num.padStart(digits, '0')
-      return this.__postAction(code).then(response)
-    }
+    // generateCode (digits) {
+    //   let num = Math.floor(((Math.random() * (Math.pow(10, digits))) + 1)).toString()
+    //   let code = num.padStart(digits, '0')
+    //   this.__postAction(code).then((response) => {
+    //     console.log(response)
+    //     return response.code
+    //   })
+    // }
   },
+  mounted(){
+    let digits = 4
+    let num = Math.floor(((Math.random() * (Math.pow(10, digits))) + 1)).toString()
+      let code = num.padStart(digits, '0')
+      this.__postAction(code).then((response) => {
+        console.log(response)
+        this.$data.code = response.code
+      })
+  }
 }
 </script>
 
@@ -39,5 +53,6 @@ export default {
 .display {
   margin: 10px;
   text-align: center;
+  font-size: xx-large;
 }
 </style>
