@@ -3,19 +3,27 @@
 </template>
 
 <script>
-import {pour} from '@/data/pumps'
 
 export default {
   name: 'orderPourer',
   props: {
-    order: Object
+    timings: Object
   },
   methods: {
+    __postAction: async (timings) => {
+      const response = await fetch('/order/pour', {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ timings: timings })
+      })
+      return await response.json()
+    },
     pourOrder(){
-      //call pouring logic
-      pour (this.order).then(() => {
+      this.__postAction(this.timings).then((response) => {
         console.log('order poured')
-        // TODO: update order status
         this.$router.push('/test/listener')
       })
     }

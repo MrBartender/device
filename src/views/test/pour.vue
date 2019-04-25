@@ -1,6 +1,6 @@
 <template>
   <div class="middle">
-    <pour-button :order="timings" ></pour-button>
+    <pour-button :timings="timings" ></pour-button>
   </div>
 </template>
 

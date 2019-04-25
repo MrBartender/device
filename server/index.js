@@ -11,7 +11,7 @@ const path = require('path')
 const app = express()
 const AWS = require('aws-sdk')
 
-import { pumps } from '@/data/pumps'
+import { pumps, pour } from '@/data/pumps'
 
 var credentials = new AWS.SharedIniFileCredentials({profile: 'prototype'})
 AWS.config.credentials = credentials
@@ -30,6 +30,7 @@ wifi.init({
 app.use(helmet())
 
 // Serve static files
+// app.use(express.static(path.resolve('./public')))
 app.use(express.static(path.resolve(__dirname, 'home/kiosk-user/mrbartender/public')))
 
 // Parse Post data
@@ -37,7 +38,7 @@ app.use(bodyParser.json())
 
 // handle base route - interrupt if no internet connection
 app.get('/', (req, res) => {
-  // res.sendFile('index.html', { root: './mrbartender/public/build' })
+  // res.sendFile('index.html', { root: './public/build' })
   res.sendFile(path.resolve(__dirname, 'home/kiosk-user/mrbartender/public/index.html'))
 })
 
@@ -100,8 +101,16 @@ app.get('/queue/next', (req, res) => {
   })
 })
 
+app.post('/order/pour', (req, res) => {
+  let timings = req.body.timings
+  pour(timings).then((response) => {
+    res.send({ status:'success' })
+  })
+})
+
 app.post('/order', (req, res) => {
   let order_id = req.body.order_id
+  console.log(req.body)
   console.log('retrieving order', order_id)
   // TODO: API call goes here
   res.send({ pumps: [{id:1, ms:2000},{id:2, ms:2000}] }) // for testing
