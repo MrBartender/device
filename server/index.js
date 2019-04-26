@@ -132,7 +132,7 @@ app.post('/code', async (req, res) => {
   console.log(code)
   API.graphql(graphqlOperation(updatePourCode, {input: {id: device_id, pourCode: code}}))
     .then(response => {
-      console.log(response)
+      // console.log(response)
       res.send({ code: response.data.updateDevice.pourCode })
     })
     .catch(error => {

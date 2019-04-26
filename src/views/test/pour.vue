@@ -2,8 +2,11 @@
   <div>
     <img class="logo" src="images/logo-400.png" alt="MrBartender Logo">
     <transition name="fade">
-      <pour-button v-if="timings" :timings="timings" ></pour-button>
-      <div v-else class="spinner" key="spinner"></div>
+      <div>
+        <pour-button v-if="order_data" :timings="order_data[2]" ></pour-button>
+        <div v-else class="spinner" key="spinner"></div>
+        <p v-if="order_data" class='info'><span> {{ order_data[0] }}</span> <span class="pipe">  |  </span><span> {{ order_data[1] }}</span> </p>
+      </div>
     </transition>
   </div>
 </template>
@@ -21,7 +24,7 @@ export default {
   },
   data () {
     return {
-      timings: false,
+      order_data: false,
     }
   },
   methods: {
@@ -37,12 +40,25 @@ export default {
   mounted(){
     this.__getAction(this.order_id).then((response) => {
       console.log(response)
-      this.$data.timings = response
-      // this.$data.timings = {'1':4000, '2':4000}
+      this.$data.order_data = response
+      // this.$data.order_data = ['Woodhouse', 'Gin and Tonic', {'1':4000, '2':4000}]
     })
   },
 }
 </script>
 
 <style lang="scss">
+  .info {
+    width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: sans-serif;
+    font-size: xx-large;
+    color: #FFFFFF;
+  }
+
+  .pipe {
+    color: rgb(145, 137, 175);
+  }
 </style>
