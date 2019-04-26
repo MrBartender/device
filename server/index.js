@@ -15,7 +15,7 @@ import Amplify, { API, graphqlOperation } from 'aws-amplify'
 import { updatePourCode } from './graphql'
 import { pumps, pour } from '@/data/pumps'
 
-const device_id = "ea9f0cd1-aaff-4bb4-a7a2-d561d495b2a3"
+const device_id = "7a97d96e-1963-4dad-b4e0-aab0906e5fe3"
 
 var credentials = new AWS.SharedIniFileCredentials({profile: 'prototype'})
 AWS.config.credentials = credentials
