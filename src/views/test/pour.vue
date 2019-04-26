@@ -30,7 +30,7 @@ export default {
   methods: {
     __getAction: async function(id) {
       const response = await fetch(
-        'https://cye04n3769.execute-api.us-east-1.amazonaws.com/dev/pour/getorder?orderID='+this.order_id, 
+        'https://db9cqhrxrk.execute-api.us-east-1.amazonaws.com/dev/pour/getOrder?orderID='+this.order_id, 
         {
           method: 'GET',
         })

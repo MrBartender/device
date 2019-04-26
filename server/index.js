@@ -25,10 +25,10 @@ var sqs = new AWS.SQS({apiVersion: '2012-11-05'})
 var queue_url = 'https://sqs.us-east-1.amazonaws.com/996076014670/TestQueue'
 
 var amplifyConfig = {
-    'aws_appsync_graphqlEndpoint': 'https://vavmylvolzhqvmrotqcaleapra.appsync-api.us-east-1.amazonaws.com/graphql',
+    'aws_appsync_graphqlEndpoint': 'https://dw32efrl6bhkjokc4jpbriuiqi.appsync-api.us-east-1.amazonaws.com/graphql',
     'aws_appsync_region': 'us-east-1',
     'aws_appsync_authenticationType': 'API_KEY',
-    'aws_appsync_apiKey': 'da2-rfinu4opufexzbxykzg62wajoe',
+    'aws_appsync_apiKey': 'da2-xwsdoeo7krcvnjug3ywkwdsxna',
 }
 Amplify.configure(amplifyConfig)
 
