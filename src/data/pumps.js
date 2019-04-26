@@ -45,9 +45,12 @@ export const pumps = [
   new pump( 12, 18, 25, 110 )
 ]
 
-export async function pour (order) {
-  for (var pump of order.pumps) {
-      let ms = pump.ms 
-      await pumps[pump.id - 1].pour_for(ms)
+export async function pour (timings) {
+  for (var pump in timings) {
+    if (timings.hasOwnProperty(pump)){
+      let ms = timings[pump] 
+      pumps[parseInt(pump) - 1].pour_for(ms)
+    }
   }
+  return true
 }

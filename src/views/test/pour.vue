@@ -1,6 +1,10 @@
 <template>
-  <div class="middle">
-    <pour-button :order="timings" ></pour-button>
+  <div>
+    <img class="logo" src="images/logo-400.png" alt="MrBartender Logo">
+    <transition name="fade">
+      <pour-button v-if="timings" :timings="timings" ></pour-button>
+      <div v-else class="spinner" key="spinner"></div>
+    </transition>
   </div>
 </template>
 
@@ -8,7 +12,7 @@
 import PourOrderButton from '@/components/PourOrderButton';
 
 export default {
-  name: 'test',
+  name: 'pour-test',
   components: {
     'pour-button': PourOrderButton
   },
@@ -17,44 +21,28 @@ export default {
   },
   data () {
     return {
-      timings: null,
+      timings: false,
     }
   },
   methods: {
-    __postAction: async function(id) {
-      return fetch('/order', {
-        method: 'post',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ order_id: id })
-      }).then(response => response.json())
+    __getAction: async function(id) {
+      const response = await fetch(
+        'https://cye04n3769.execute-api.us-east-1.amazonaws.com/dev/pour/getorder?orderID='+this.order_id, 
+        {
+          method: 'GET',
+        })
+      return await response.json()
     },
   },
   mounted(){
-    this.__postAction(this.order_id).then((response) => {
-      this.$data.timings = response
+    this.__getAction(this.order_id).then((response) => {
+      console.log(response)
+      // this.$data.timings = response
+      this.$data.timings = {'1':4000, '2':4000}
     })
   },
 }
 </script>
 
 <style lang="scss">
-.middle {
-  top: 40vh;
-}
-
-.row {
-  width: 110vw;
-  position: relative;
-
-  button {
-    width: 15vw;
-    height: 50px;
-    margin: 0;
-    margin-right: 1.6vw;
-    margin-bottom: 10px;
-  }
-}
 </style>

@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <transition name="fade">
-      <router-view v-if="loaded" key="view"></router-view>
-      <div v-else class="spinner" key="spinner"></div>
-    </transition>
-  </div>
+  <transition name="fade">
+    <router-view v-if="loaded" key="view"></router-view>
+    <div v-else class="spinner" key="spinner"></div>
+  </transition>
 </template>
 
 <script>
@@ -37,6 +35,7 @@ export default {
 body {
   margin: 0;
   overflow: hidden;
+  background-color: #252D4A;
 }
 
 #app {

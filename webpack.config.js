@@ -50,6 +50,8 @@ const frontendConfig = {
       extensions: ['.js', '.vue', '.json'],
       alias: {
         '@': path.resolve(__dirname, 'src'),
+        'images': path.resolve(__dirname, 'public', 'images'),
+        'vue': 'vue/dist/vue.esm.js',
       }
     },
     node: {

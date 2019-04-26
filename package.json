@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/MrBartender/device#readme",
   "dependencies": {
+    "aws-amplify": "^1.1.26",
     "aws-sdk": "^2.439.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
@@ -30,6 +31,7 @@
     "onoff": "^3.2.9",
     "vue": "^2.6.2",
     "vue-router": "^3.0.2",
+    "vue2-circle-progress": "^1.2.3",
     "vue2-touch-events": "^1.1.2",
     "webpack-node-externals": "^1.7.2"
   },

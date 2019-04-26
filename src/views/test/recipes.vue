@@ -1,5 +1,5 @@
 <template>
-  <div class="recipes">
+  <div>
     <recipe-view :recipe="selected" class="full-width"></recipe-view>
     <select v-model="selected">
       <option v-for="recipe in recipes" :key="recipe[name]" :value="recipe">
@@ -26,9 +26,6 @@ export default {
 .full-width {
   width: 100vw;
   margin-bottom: 20px;
-}
-.recipes {
-  margin: 10px
 }
 </style>
 

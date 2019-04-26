@@ -1,5 +1,5 @@
 <template>
-  <button v-touch:start="startPump" v-touch:end="stopPump">{{ number }}</button>
+  <button class="pumpTestButton" v-touch:start="startPump" v-touch:end="stopPump">{{ number }}</button>
 </template>
 
 <script>
@@ -25,16 +25,26 @@ export default {
       this._postAction('/startPump', this.number)
         .then((response) => {
           this.$root.$emit('timer-start')
-          console.log('Start pump ' + this.number + ', response: ' + JSON.stringify(response))
+          console.log('Start pump ' + this.number)
         })
     },
     stopPump() {
       this._postAction('/stopPump', this.number)
         .then((response) => {
           this.$root.$emit('timer-stop')
-          console.log('Stop pump ' + this.number + ', response: ' + JSON.stringify(response))
+          console.log('Stop pump ' + this.number)
         })
     }
   }
 }
 </script>
+
+<style lang="scss">
+  .pumpTestButton {
+    width: 15vw;
+    height: 50px;
+    margin: 0;
+    margin-right: 1.6vw;
+    margin-bottom: 10px;
+  }
+</style>

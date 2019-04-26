@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <transition name="fade">
-      <router-view v-if="loaded" key="view"></router-view>
-      <div v-else class="spinner" key="spinner"></div>
-    </transition>
-  </div>
+  <transition name="fade">
+    <router-view v-if="loaded" key="view"></router-view>
+    <div v-else class="spinner" key="spinner"></div>
+  </transition>
 </template>
 
 <script>
@@ -37,6 +35,7 @@ export default {
 body {
   margin: 0;
   overflow: hidden;
+  background-color: #252D4A;
 }
 
 #app {
@@ -74,8 +73,8 @@ body {
   margin-left: -25px;
   border-radius: 50%;
   border: 6px solid transparent;
-  border-top-color: #EE5525;
-  border-bottom-color: #EE5525;
+  border-top-color: #535BFE;
+  border-bottom-color: #535BFE;
   animation: spinner 1.2s ease infinite;
 }
 </style>
