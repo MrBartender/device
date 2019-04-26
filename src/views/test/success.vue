@@ -16,7 +16,7 @@ export default {
     }
   },
   mounted () {
-    setTimeout(this.redirect, 2000)
+    setTimeout(this.redirect, 1200)
   },
 }
 </script>

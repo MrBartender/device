@@ -37,8 +37,8 @@ export default {
   mounted(){
     this.__getAction(this.order_id).then((response) => {
       console.log(response)
-      // this.$data.timings = response
-      this.$data.timings = {'1':4000, '2':4000}
+      this.$data.timings = response
+      // this.$data.timings = {'1':4000, '2':4000}
     })
   },
 }
