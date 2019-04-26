@@ -1,6 +1,10 @@
 <template>
   <div>
-    <pour-button :timings="timings" ></pour-button>
+    <img class="logo" src="images/logo-400.png" alt="MrBartender Logo">
+    <transition name="fade">
+      <pour-button v-if="timings" :timings="timings" ></pour-button>
+      <div v-else class="spinner" key="spinner"></div>
+    </transition>
   </div>
 </template>
 
@@ -17,7 +21,7 @@ export default {
   },
   data () {
     return {
-      timings: null,
+      timings: false,
     }
   },
   methods: {

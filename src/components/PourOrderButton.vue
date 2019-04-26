@@ -46,18 +46,14 @@ export default {
     width: 50vw;
     height: 80px;
     box-shadow: 0px 2px 8px 1px rgb(83, 91, 254);
-    margin: 25vw;
     border-style: none;
     border-radius: 40px;
     background-color: #535BFE;
     color: #FFFFFF;
     font-size: xx-large;
-  }
-  .pour-button:hover{
-    background-color:#9353fe
-  }
-  .pour-button:active{
-    background-color:#9353fe
+    margin-top: 50px;
+    margin-right: 25vw;
+    margin-left: 25vw;
   }
 
 </style>

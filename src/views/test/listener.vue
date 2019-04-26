@@ -1,7 +1,8 @@
 <template>
-  <div class="middle">
-    <pour-code-display></pour-code-display>
-  </div>
+    <div>
+      <img class="logo" src="images/logo-400.png" alt="MrBartender Logo">
+      <pour-code-display></pour-code-display>
+    </div>
 </template>
 
 <script>
@@ -38,20 +39,4 @@ export default {
 </script>
 
 <style lang="scss">
-.middle {
-  top: 40vh;
-}
-
-.row {
-  width: 110vw;
-  position: relative;
-
-  button {
-    width: 15vw;
-    height: 50px;
-    margin: 0;
-    margin-right: 1.6vw;
-    margin-bottom: 10px;
-  }
-}
 </style>

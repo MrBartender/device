@@ -1,6 +1,7 @@
 <template>
   <div>
     <router-view></router-view>
+
     <!-- Page refresh helper button -->
     <nav class="menu">
       <button v-touch:tap="reload">Refresh</button>
@@ -13,7 +14,7 @@
 
 <script>
 export default {
-  name: 'test-layout',
+  name: 'splash',
   methods: {
     reload() {
       this.$router.go()
@@ -22,12 +23,38 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss">body {
+  background-color: #252D4A;
+}
+
 .menu {
   z-index: 1000;
   margin: 10px;
   position: absolute;
   left: 0;
   bottom: 0;
+}
+.splash-logo {
+  left: 35.5%;
+  top: 20%;
+  position: absolute;
+  width: 25%;
+  display: block;
+  margin-top: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.logo {
+  width: 15%;
+  display: block;
+  margin-top: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: sans-serif;
 }
 </style>

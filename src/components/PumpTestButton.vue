@@ -1,5 +1,5 @@
 <template>
-  <button v-touch:start="startPump" v-touch:end="stopPump">{{ number }}</button>
+  <button class="pumpTestButton" v-touch:start="startPump" v-touch:end="stopPump">{{ number }}</button>
 </template>
 
 <script>
@@ -38,3 +38,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .pumpTestButton {
+    width: 15vw;
+    height: 50px;
+    margin: 0;
+    margin-right: 1.6vw;
+    margin-bottom: 10px;
+  }
+</style>

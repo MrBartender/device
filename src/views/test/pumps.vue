@@ -42,13 +42,5 @@ export default {
 .row {
   width: 110vw;
   position: relative;
-
-  button {
-    width: 15vw;
-    height: 50px;
-    margin: 0;
-    margin-right: 1.6vw;
-    margin-bottom: 10px;
-  }
 }
 </style>

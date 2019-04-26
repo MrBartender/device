@@ -44,9 +44,9 @@ app.use(helmet())
 
 // Serve static files
 /// #if DEV
-app.use(express.static(path.resolve('./public')))
+  app.use(express.static(path.resolve('./public')))
 /// #else
-app.use(express.static(path.resolve(__dirname, 'home/kiosk-user/mrbartender/public')))
+  app.use(express.static(path.resolve(__dirname, 'home/kiosk-user/mrbartender/public')))
 /// #endif
 
 // Parse Post data
@@ -55,9 +55,9 @@ app.use(bodyParser.json())
 // handle base route - interrupt if no internet connection
 app.get('/', (req, res) => {
   /// #if DEV
-  res.sendFile('index.html', { root: './public/build' })
+    res.sendFile('index.html', { root: './public/build' })
   /// #else
-  res.sendFile(path.resolve(__dirname, 'home/kiosk-user/mrbartender/public/index.html'))
+    res.sendFile(path.resolve(__dirname, 'home/kiosk-user/mrbartender/public/index.html'))
   /// #endif
 })
 
@@ -139,16 +139,6 @@ app.post('/code', async (req, res) => {
       console.error(error)
     })
 })
-
-// app.post('/order', (req, res) => {
-//   let order_id = req.body.order_id
-//   console.log(req.body)
-//   console.log('retrieving order', order_id)
-//   const timings = fetch('https://cye04n3769.execute-api.us-east-1.amazonaws.com/dev/pour/getorder?orderID='+order_id, {method: 'get'})
-//   console.log(timings)
-//   res.send({ timings })
-//   // res.send({ pumps: [{id:1, ms:2000},{id:2, ms:2000}] }) // for testing
-// })
 
 // Get a pump by id
 app.get('/pump', (req, res) => {

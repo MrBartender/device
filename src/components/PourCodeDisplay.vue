@@ -1,5 +1,8 @@
 <template>
-  <p class="display">Pour Code: {{ code }}</p>
+  <transition name="fade">
+    <p v-if="code" class="display">{{ code }}</p>
+    <div v-else class="spinner" key="spinner"></div>
+  </transition>
 </template>
 
 <script>
@@ -10,8 +13,7 @@ export default {
   },
   data () {
     return {
-      code: null
-      // code: this.generateCode(4)
+      code: false
     }
   },
   methods: {
@@ -25,17 +27,7 @@ export default {
         body: JSON.stringify({ code: code })
       })
       return await response.json()
-      
-
-    },
-    // generateCode (digits) {
-    //   let num = Math.floor(((Math.random() * (Math.pow(10, digits))) + 1)).toString()
-    //   let code = num.padStart(digits, '0')
-    //   this.__postAction(code).then((response) => {
-    //     console.log(response)
-    //     return response.code
-    //   })
-    // }
+    }
   },
   mounted(){
     let digits = 4
@@ -50,9 +42,11 @@ export default {
 </script>
 
 <style lang="scss">
-.display {
-  margin: 10px;
-  text-align: center;
-  font-size: xx-large;
-}
+  .display {
+    text-align: center;
+    font-size: -webkit-xxx-large;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #FFFFFF;
+  }
 </style>
