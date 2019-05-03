@@ -28,7 +28,7 @@ var amplifyConfig = {
     'aws_appsync_graphqlEndpoint': 'https://dw32efrl6bhkjokc4jpbriuiqi.appsync-api.us-east-1.amazonaws.com/graphql',
     'aws_appsync_region': 'us-east-1',
     'aws_appsync_authenticationType': 'API_KEY',
-    'aws_appsync_apiKey': 'da2-xwsdoeo7krcvnjug3ywkwdsxna',
+    'aws_appsync_apiKey': 'da2-vxagcjyt6raanetnjpy4rsjegm',
 }
 Amplify.configure(amplifyConfig)
 
