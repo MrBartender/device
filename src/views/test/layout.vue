@@ -3,12 +3,12 @@
     <router-view></router-view>
 
     <!-- Page refresh helper button -->
-    <!-- <nav class="menu"> -->
+    <nav class="menu">
       <!-- <button v-touch:tap="reload">Refresh</button> -->
-      <!-- <router-link to="/test/pumps">Pumps</router-link> -->
-      <!-- <router-link to="/test/recipes">Recipes</router-link> -->
-      <!-- <router-link to="/test/listener">Bartender</router-link> -->
-    <!-- </nav> -->
+      <router-link to="/test/pumps">Pumps</router-link>
+      <router-link to="/test/recipes">Recipes</router-link>
+      <router-link to="/test/listener">Bartender</router-link>
+    </nav>
   </div>
 </template>
 
