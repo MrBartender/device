@@ -41,6 +41,7 @@ export default {
 
 .row {
   width: 110vw;
+  padding-top: 100px;
   position: relative;
 }
 </style>

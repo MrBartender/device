@@ -59,5 +59,6 @@ a {
   color: #FFFFFF;
   text-decoration: none;
   font-family: sans-serif;
+  margin-right: 10px;
 }
 </style>
